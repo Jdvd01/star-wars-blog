@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: localStorage.getItem("token") || "",
-			urlBase: "https://3000-jdvd01-starwarsapi-fis1oc47l2e.ws-us43.gitpod.io",
+			urlBase: "https://3000-jdvd01-starwarsapi-l8m22p452n7.ws-us44.gitpod.io",
 			endPoints: ["people", "planets"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],
@@ -108,10 +108,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				let data = await response.json()
 				if(response.ok){
-					setStore({
-						...store,
-						token: data.token
-					})
 					window.alert("Se ha registrado con exito, ahora debe hacer Login")
 				}else{
 					window.alert("Hubo un error, quizas el usuario ya esta creado, pruebe haciendo Login")
@@ -121,12 +117,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let store = getStore()
 				setStore({
 					...store,
-					token: data.token
+					token: ""
 				})
-				localStorage.removeItem("favorites")
 				localStorage.removeItem("token")
 				window.alert('Sesion finalizada con exito')
-
 			}
 		}
 	}
