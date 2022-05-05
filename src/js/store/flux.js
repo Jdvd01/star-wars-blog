@@ -1,38 +1,28 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			// urlBase: "https://www.swapi.tech/api",
+			token: localStorage.getItem("token") || "",
 			urlBase: "https://3000-jdvd01-starwarsapi-fis1oc47l2e.ws-us43.gitpod.io",
-			endPoints: ["people", "planets", "vehicles"],
+			endPoints: ["people", "planets"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],
-			vehicles: JSON.parse(localStorage.getItem("vehicles")) || [],
-			favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+			favorites: JSON.parse(localStorage.getItem("favorites")) || []
 		},
 		actions: {
 			fetchApi: async () => {
 				const store = getStore()
-				if (!store.people.length) {
-					for (let nature of store.endPoints) {
-						try {
-							let response = await fetch(`${store.urlBase}/${nature}`)
-							if (response.ok) {
-								let data = await response.json()
-								data.results.map(async (item) => {
-									let newResponse = await fetch(`${store.urlBase}/${nature}/${item.uid}`)
-									if (newResponse.ok) {
-										let newResult = await newResponse.json()
-										setStore({
-											...store,
-											[nature]: [...store[nature], newResult.result]
-										})
-										localStorage.setItem(nature, JSON.stringify(store[nature]))
-									}
-								})
-							}
-						} catch (error) {
-							console.log("Hubo un error:", error)
+				if (!store.people.length || !store.planets.length) {
+					try {
+						let response = await fetch(`${store.urlBase}/people`)
+						let response2 = await fetch(`${store.urlBase}/planets`)
+						let data = await response.json()
+						let data2 = await response2.json()
+						if (response.ok){
+							localStorage.setItem("people", JSON.stringify(data))
+							localStorage.setItem("planets", JSON.stringify(data2))
 						}
+					} catch (error) {
+						console.log("Hubo un error", error)
 					}
 				}
 			},
@@ -40,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let store = getStore();
 				let exist = store.favorites.find((item) =>{
 					return(
-						item._id == id
+						item.id == id
 					)
 				})
 				if(!exist){
@@ -48,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						let favorite;
 						favorite = store[endPoint].find((item) =>{
 							return(
-								item._id == id
+								item.id == id
 							)
 						})
 						if(favorite){
@@ -63,7 +53,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}else{
 					let newFavorite = store.favorites.filter((item) =>{
 						return(
-							item._id != id
+							item.id != id
 						)
 					})
 					setStore({
@@ -77,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let store = getStore()
 				let deleteFavorite = store.favorites.filter((item) =>{
 					return (
-						item._id != id
+						item.id != id
 					)
 				})
 				setStore({
@@ -86,6 +76,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				localStorage.setItem("favorites", JSON.stringify(store.favorites))
 			},
+			handleLogin: async (login) =>{
+				let store = getStore()
+				const response = await fetch(`${store.urlBase}/login`, {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(login)
+				})
+				let data = await response.json()
+				if(response.ok){
+					setStore({
+						...store,
+						token: data.token
+					})
+					localStorage.setItem("token", data.token)
+					window.alert("Sesion iniciada con exito")
+				}else{
+					window.alert("Hubo un error, pruebe a registrarse")
+				}
+			},
+			handleRegister: async (register) =>{
+				let store = getStore()
+				const response = await fetch(`${store.urlBase}/register`, {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(register)
+				})
+				let data = await response.json()
+				if(response.ok){
+					setStore({
+						...store,
+						token: data.token
+					})
+					window.alert("Se ha registrado con exito, ahora debe hacer Login")
+				}else{
+					window.alert("Hubo un error, quizas el usuario ya esta creado, pruebe haciendo Login")
+				}
+			},
+			handleLogout: () =>{
+				localStorage.removeItem("favorites")
+				localStorage.removeItem("token")
+				window.alert('Sesion finalizada con exito')
+
+			}
 		}
 	}
 };

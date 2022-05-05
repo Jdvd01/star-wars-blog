@@ -12,41 +12,59 @@ export const Navbar = () => {
 					<img src={logo} />
 				</Link>
 				<div className="ml-auto">
-					<div className="dropdown">
-						<button
-							className="btn btn-primary dropdown-toggle favorites"
-							type="button"
-							id="dropdownMenuButton1"
-							data-bs-toggle="dropdown"
-							aria-expanded="false">
-							Favorites
-							<span className="badge bg-secondary mx-1">
-								{store.favorites.length}
-							</span>
-						</button>
-						<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					{store.token?.length > 0 ?
+						(
+							<div className="dropdown">
+								<button
+									className="btn btn-dark dropdown-toggle favorites"
+									type="button"
+									id="dropdownMenuButton1"
+									data-bs-toggle="dropdown"
+									aria-expanded="false">
+									Favorites
+									<span className="badge bg-secondary mx-1">
+										{store.favorites.length}
+									</span>
+								</button>
+								<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-							{ /* Si no hay favorites muestra esto */
-								store.favorites == "" ? (<li className="ms-2">(empty)</li>
-								) : (
-									/* Lista de favoritos */
-									store.favorites.map((item) => {
-										return (
-											<li key={item._id} className="ms-2 d-flex">
-												{item.properties.name}
-												<button
-													type="button"
-													className="delete"
-													onClick={() => actions.deleteFavorite(item._id)}>
-													<i className="fas fa-trash"></i>
-												</button>
-											</li>
-										);
-									})
-								)
-							}
-						</ul>
-					</div>
+									{ /* Si no hay favorites muestra esto */
+										store.favorites == "" ? (<li className="ms-2">(empty)</li>) 
+										: (
+											/* Lista de favoritos */
+											store.favorites.map((item) => {
+												return (
+													<li key={item.id} className="ms-2 d-flex">
+														{item.name}
+														<button
+															type="button"
+															className="delete"
+															onClick={() => actions.deleteFavorite(item.id)}>
+															<i className="fas fa-trash"></i>
+														</button>
+													</li>
+												);
+											})
+										)
+									}
+								</ul>
+								<button type="button" 
+								className="btn btn-dark register"
+								onClick={() => actions.handleLogout()}>
+									<a href="/"> <i className="fas fa-sign-out-alt"></i></a>
+								</button>
+							</div>
+
+						) : (
+							<div className="btn-navbar">
+								<button type="button" className="btn btn-dark register">
+									<Link to='/register'>Register</Link>
+								</button>
+								<button type="button" className="btn btn-dark register">
+									<Link to="/login">Login</Link>
+								</button>
+							</div>
+						)}
 				</div>
 			</div>
 		</nav>

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom"
 import { Context } from "../store/appContext"
 
 
-const Card = ({ nature, properties, uid, _id }) => {
+const Card = ({ nature, item }) => {
     const { actions } = useContext(Context);
-    const { name, gender, hair_color, eye_color, climate, gravity, population, model, passengers, cost_in_credits } = properties;
+    const { name, gender, hair_color, eye_color, climate, gravity, population, id } = item;
 
     return (
         <>
@@ -20,13 +20,13 @@ const Card = ({ nature, properties, uid, _id }) => {
                             Hair-color: {hair_color}  <br />
                             Eye-color: {eye_color}
                         </p>
-                        <Link to={`/${nature}/${uid}`}>
+                        <Link to={`/${nature}/${id}`}>
                             <button className="btn btn-primary">  Learn More!  </button>
                         </Link>
                         <button
                             type='button'
                             className={`corazon negro`}
-                            onClick={() => actions.addFavorites(_id)}>
+                            onClick={() => actions.addFavorites(id)}>
                             <i className="fas fa-heart"></i>
                         </button>
                     </div>
@@ -41,36 +41,14 @@ const Card = ({ nature, properties, uid, _id }) => {
                             Gravity: {gravity}  <br />
                             Population:  {population}
                         </p>
-                        <Link to={`/${nature}/${uid}`}>
+                        <Link to={`/${nature}/${id}`}>
                             <button className="btn btn-primary">  Learn More!  </button>
                         </Link>
                         <button
                             className={`corazon negro`}
-                            onClick={() => actions.addFavorites(_id)}>
+                            onClick={() => actions.addFavorites(id)}>
                             <i className="fas fa-heart"></i>
                         </button>
-                    </div>
-                </div>
-            ) : nature === "vehicles" ? (
-                <div className="card">
-                    <img src="http://via.placeholder.com/400x200" className="card-img" alt="imagen" />
-                    <div className="card-body">
-                        <p className="card-title">{name}</p>
-                        <p className="card-text">
-                            Model: {model}   <br />
-                            Passengers: {passengers} <br />
-                            Price: {cost_in_credits}
-                        </p>
-                        <div className="endButtons">
-                            <Link to={`/${nature}/${uid}`}>
-                                <button className="btn btn-primary">  Learn More!  </button>
-                            </Link>
-                            <button
-                                className={`corazon negro`}
-                                onClick={() => actions.addFavorites(_id)}>
-                                <i className="fas fa-heart"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
             ) : (
@@ -85,9 +63,7 @@ const Card = ({ nature, properties, uid, _id }) => {
 
 Card.propTypes = {
     nature: propTypes.string,
-    properties: propTypes.object,
-    uid: propTypes.string,
-    _id: propTypes.string
+    id: propTypes.number
 }
 
 export default Card;

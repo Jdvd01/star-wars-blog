@@ -6,6 +6,39 @@
     width: 150px;
     height: 90px;
 }
+.navbar a{
+    color: white
+}
+.register{
+    margin-left: 10px;
+    font-size: 20px;
+}
+input{
+    width: 100%;
+    border: 0px;
+    border-bottom: 1px solid gray;
+    outline: none;
+    margin: 10px 0px;
+}
+.form{
+    border: 3px solid black;
+    border-radius: 5%;
+    margin: auto;
+    height: 300px;
+    padding: 10px 20px 0px 20px;
+    width: 75vh;
+}
+.login{
+    font-size: 20px;
+}
+.submit{
+    margin-top: 5px;
+    width: 100%;
+}
+.text-form{
+    margin: 0px;
+    font-size: 20px;
+}
 .footer{
     text-align: center;
     background-color: black;
@@ -18,6 +51,9 @@
 }
 a{
     text-decoration: none;
+    color: white;
+}
+.submit a{
     color: white;
 }
 .card-scroll{
@@ -34,6 +70,9 @@ a{
 .negro{
     border: none;
     background-color: white;
+}
+.negro:active{
+    color: red;
 }
 
 

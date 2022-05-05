@@ -8,6 +8,8 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Details from "./views/Details.jsx";
+import Register from "./component/Register.jsx";
+import Login from "./component/Login.jsx";
 
 //create your first component
 const Layout = () => {
@@ -22,6 +24,8 @@ const Layout = () => {
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/login" element={<Login />} />
 						<Route path="/:nature/:id" element={<Details />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>

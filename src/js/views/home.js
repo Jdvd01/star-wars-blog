@@ -13,7 +13,7 @@ export const Home = () => {
 			<div className="card-scroll row flex-nowrap">
 				{store.people.map((item) =>{
 					return(
-					<Card key={item.uid} {...item} nature="people" />
+					<Card key={item.id} item={item} nature="people" />
 					);
 				})}
 			</div>
@@ -22,16 +22,7 @@ export const Home = () => {
 			<div className="card-scroll row flex-nowrap">
 				{store.planets.map((item) =>{
 					return(
-					<Card key={item.uid} {...item} nature="planets" />
-					);
-				})}
-			</div>
-
-			<h1>Vehicles:</h1>
-			<div className="card-scroll row flex-nowrap">
-				{store.vehicles.map((item) =>{
-					return(
-						<Card key={item.uid} {...item} nature="vehicles" />
+					<Card key={item.id} item={item} nature="planets" />
 					);
 				})}
 			</div>

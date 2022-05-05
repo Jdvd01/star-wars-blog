@@ -10,21 +10,21 @@ const Details = () => {
     const { nature, id } = params
 
     const [detail, setDetail] = useState({});
-
     const getDetails = () => {
         let newDetail = store[nature].find((item) => {
             return (
-                item.uid == id
-            )
-        })
-        if (newDetail) {
-            setDetail(newDetail)
+                item.id == id
+                )
+            })
+            if (newDetail) {
+                setDetail(newDetail)
+            }
         }
-    }
-
+        
     useEffect(() => {
         getDetails()
     }, [])
+
 
     return (
         <>
