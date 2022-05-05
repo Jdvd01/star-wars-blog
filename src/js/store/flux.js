@@ -120,6 +120,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: ""
 				})
 				localStorage.removeItem("token")
+				localStorage.removeItem("favorites")
 				window.alert('Sesion finalizada con exito')
 			}
 		}
