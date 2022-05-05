@@ -118,6 +118,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			handleLogout: () =>{
+				let store = getStore()
+				setStore({
+					...store,
+					token: data.token
+				})
 				localStorage.removeItem("favorites")
 				localStorage.removeItem("token")
 				window.alert('Sesion finalizada con exito')
