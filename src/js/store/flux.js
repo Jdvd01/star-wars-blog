@@ -1,83 +1,105 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			token: localStorage.getItem("token") || "",
 			urlBase: "https://3000-jdvd01-starwarsapi-l8m22p452n7.ws-us44.gitpod.io",
 			endPoints: ["people", "planets"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],
-			favorites: JSON.parse(localStorage.getItem("favorites")) || []
+			favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+			token: localStorage.getItem("token") || ""
 		},
 		actions: {
 			fetchApi: async () => {
 				const store = getStore()
 				if (!store.people.length || !store.planets.length) {
 					try {
-						let response = await fetch(`${store.urlBase}/people`)
-						let response2 = await fetch(`${store.urlBase}/planets`)
-						let data = await response.json()
-						let data2 = await response2.json()
-						if (response.ok){
-							localStorage.setItem("people", JSON.stringify(data))
-							localStorage.setItem("planets", JSON.stringify(data2))
+						for (let endPoint of store.endPoints) {
+							let response = await fetch(`${store.urlBase}/${endPoint}`)
+							let data = await response.json()
+
+							if (response.ok) {
+								console.log(data)
+								localStorage.setItem([endPoint], JSON.stringify(data))
+							}
 						}
 					} catch (error) {
 						console.log("Hubo un error", error)
 					}
 				}
 			},
-			addFavorites: (id) =>{
+			getFavorites: async () => {
 				let store = getStore();
-				let exist = store.favorites.find((item) =>{
-					return(
-						item.id == id
-					)
-				})
-				if(!exist){
-					for(let endPoint of store.endPoints){
-						let favorite;
-						favorite = store[endPoint].find((item) =>{
-							return(
-								item.id == id
-							)
-						})
-						if(favorite){
-							setStore({
-								...store,
-								favorites: [...store.favorites, favorite]
-							})
-							localStorage.setItem("favorites", JSON.stringify(store.favorites))
-							return;
+				try {
+					let response = await fetch(`${store.urlBase}/user/favorites`, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${store.token}`
 						}
+					})
+					if (response.ok) {
+						let data = await response.json()
+						setStore({
+							...store,
+							favorites: data
+						})
+						console.log(data)
+						localStorage.setItem("favorites", JSON.stringify(store.favorites))
 					}
-				}else{
-					let newFavorite = store.favorites.filter((item) =>{
-						return(
-							item.id != id
-						)
-					})
-					setStore({
-						...store,
-						favorites: newFavorite
-					})
-					localStorage.setItem("favorites", JSON.stringify(store.favorites))
+				} catch (error) {
+					console.log("Hubo un error", error)
 				}
 			},
-			deleteFavorite: (id) =>{
-				let store = getStore()
-				let deleteFavorite = store.favorites.filter((item) =>{
-					return (
-						item.id != id
-					)
-				})
-				setStore({
-					...store,
-					favorites: deleteFavorite
-				})
-				localStorage.setItem("favorites", JSON.stringify(store.favorites))
+			addFavorites: async (id, name, nature) => {
+				let store = getStore();
+				let actions = getActions();
+				let body = {
+					"nature_id": id,
+					"name": name
+				}
+				try {
+					let response = await fetch(`${store.urlBase}/user/favorites/${nature}`, {
+						method: 'POST',
+						body: JSON.stringify(body),
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${store.token}`
+						}
+					})
+					if (response.ok) {
+						actions.getFavorites()
+					}
+				} catch (error) {
+					console.log("hubo un error", error)
+				}
 			},
-			handleLogin: async (login) =>{
+			deleteFavorite: async (nature_id, nature) => {
 				let store = getStore()
+				let actions = getActions()
+				let body = {
+					"nature_id": nature_id,
+					"nature": nature
+				}
+				try {
+					let response = await fetch(`${store.urlBase}/user/favorites/${nature}/${nature_id}`, {
+						method: 'DELETE',
+						body: JSON.stringify(body),
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": `Bearer ${store.token}`
+						},
+					})
+					if (response.ok) {
+						actions.getFavorites()
+					}
+				}catch(error){
+					console.log("Hubo un error", error)
+				}
+				
+			},
+			handleLogin: async (login) => {
+				let store = getStore()
+				let actions = getActions()
 				const response = await fetch(`${store.urlBase}/login`, {
 					method: 'POST',
 					headers: {
@@ -86,18 +108,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(login)
 				})
 				let data = await response.json()
-				if(response.ok){
+				if (response.ok) {
 					setStore({
 						...store,
 						token: data.token
 					})
 					localStorage.setItem("token", data.token)
-					window.alert("Sesion iniciada con exito")
-				}else{
+					actions.getFavorites()
+				} else {
 					window.alert("Hubo un error, pruebe a registrarse")
 				}
 			},
-			handleRegister: async (register) =>{
+			handleRegister: async (register) => {
 				let store = getStore()
 				const response = await fetch(`${store.urlBase}/register`, {
 					method: 'POST',
@@ -106,14 +128,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(register)
 				})
-				let data = await response.json()
-				if(response.ok){
+				if (response.ok) {
 					window.alert("Se ha registrado con exito, ahora debe hacer Login")
-				}else{
+				} else {
 					window.alert("Hubo un error, quizas el usuario ya esta creado, pruebe haciendo Login")
 				}
 			},
-			handleLogout: () =>{
+			handleLogout: () => {
 				let store = getStore()
 				setStore({
 					...store,

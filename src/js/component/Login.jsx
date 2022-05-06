@@ -16,19 +16,19 @@ const Login = () => {
             <p className='text-form'>Email</p>
             <input type="text"
                 name="email"
-                placeholder='email'
+                placeholder='Email'
                 onChange={(event) => setLogin({ ...login, [event.target.name]: event.target.value })} />
 
             <p className='text-form'>Password</p>
             <input type="password"
                 name='password'
-                placeholder='password'
+                placeholder='Password'
                 onChange={(event) => setLogin({ ...login, [event.target.name]: event.target.value })} />
             <br />
             <button type='button'
                 className="btn btn-primary submit"
                 onClick={() => actions.handleLogin(login)}>
-                <Link to='/'>Login</Link>
+                Login
             </button>
 
         </div>

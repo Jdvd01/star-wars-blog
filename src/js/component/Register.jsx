@@ -16,20 +16,20 @@ const Register = () => {
             <p className='text-form'>Email</p>
             <input type="text"
                 name="email"
-                placeholder='email'
+                placeholder='Email'
                 onChange={(event) => setRegister({ ...register, [event.target.name]: event.target.value })} />
 
             <p className='text-form'>Password</p>
             <input type="password"
                 name='password'
-                placeholder='password'
+                placeholder='Password'
                 onChange={(event) => setRegister({ ...register, [event.target.name]: event.target.value })} />
             <br />
             <button type='button'
                 className="btn btn-primary submit"
                 id="liveToastBtn"
                 onClick={() => actions.handleRegister(register)}>
-                <Link to='/login'>Register</Link>
+                Register
             </button>
 
         </div>

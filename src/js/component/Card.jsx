@@ -26,7 +26,7 @@ const Card = ({ nature, item }) => {
                         <button
                             type='button'
                             className={`corazon negro`}
-                            onClick={() => actions.addFavorites(id)}>
+                            onClick={() => actions.addFavorites(id, name, nature)}>
                             <i className="fas fa-heart"></i>
                         </button>
                     </div>
@@ -46,7 +46,7 @@ const Card = ({ nature, item }) => {
                         </Link>
                         <button
                             className={`corazon negro`}
-                            onClick={() => actions.addFavorites(id)}>
+                            onClick={() => actions.addFavorites(id, name, nature)}>
                             <i className="fas fa-heart"></i>
                         </button>
                     </div>
@@ -62,8 +62,8 @@ const Card = ({ nature, item }) => {
 };
 
 Card.propTypes = {
-    nature: propTypes.string,
-    id: propTypes.number
+    item: propTypes.object,
+    nature: propTypes.string
 }
 
 export default Card;

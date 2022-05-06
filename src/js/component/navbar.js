@@ -34,12 +34,12 @@ export const Navbar = () => {
 											/* Lista de favoritos */
 											store.favorites.map((item) => {
 												return (
-													<li key={item.id} className="ms-2 d-flex">
+													<li key={item.nature_id} className="ms-2 d-flex">
 														{item.name}
 														<button
 															type="button"
 															className="delete"
-															onClick={() => actions.deleteFavorite(item.id)}>
+															onClick={() => actions.deleteFavorite(item.nature_id, item.nature)}>
 															<i className="fas fa-trash"></i>
 														</button>
 													</li>
