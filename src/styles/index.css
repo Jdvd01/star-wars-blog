@@ -50,8 +50,11 @@ a{
 .card-body{
     text-align: start;
 }
-.corazon{
-    margin-left: 110px;
+.card-footer{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
 }
 
 /* Card de details */
