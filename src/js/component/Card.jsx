@@ -41,9 +41,11 @@ const Card = ({ nature, properties, uid, _id }) => {
               <button
                 type="button"
                 className={`corazon negro`}
-                onClick={() => actions.addFavorites(_id)}
+                onClick={() => {
+                  actions.addFavorites(_id);
+                }}
               >
-                <i className="fas fa-heart"></i>
+                {actions.isFavorite(_id)}
               </button>
             </div>
           </div>
@@ -70,7 +72,7 @@ const Card = ({ nature, properties, uid, _id }) => {
                 className={`corazon negro`}
                 onClick={() => actions.addFavorites(_id)}
               >
-                <i className="fas fa-heart"></i>
+                {actions.isFavorite(_id)}
               </button>
             </div>
           </div>
@@ -97,7 +99,7 @@ const Card = ({ nature, properties, uid, _id }) => {
                 className={`corazon negro`}
                 onClick={() => actions.addFavorites(_id)}
               >
-                <i className="fas fa-heart"></i>
+                {actions.isFavorite(_id)}
               </button>
             </div>
           </div>
