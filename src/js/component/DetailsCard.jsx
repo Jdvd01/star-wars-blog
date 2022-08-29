@@ -7,131 +7,103 @@ const DetailsCard = ({ detail, nature }) => {
         <>
             {nature == "people" ? (
                 <>
+                <div className='cards-container'>
+
                     <div className="card-details row">
-                        <img src="http://via.placeholder.com/800x600" className="card-img-top col-6" alt="..." />
-                        <div className="card-body col-6">
+                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
+                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        </div>
+                        <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
                             <p className="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam assumenda doloribus incidunt molestias minima aliquam dolor in, dolores eaque repellat minus ipsa nihil sunt esse.</p>
                         </div>
                     </div>
                     <hr />
                     <div className="general-details row">
-                        <p className="col-2">
-                            <strong>Name</strong>
-                            <br />
-                            {properties?.name}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Name</strong>: {properties?.name}
                         </p>
-                        <p className="col-2">
-                            <strong>Birth Year</strong>
-                            <br />
-                            {properties?.birth_year}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Birth Year</strong>: {properties?.birth_year}
                         </p>
-                        <p className="col-2">
-                            <strong>Gender</strong>
-                            <br />
-                            {properties?.gender}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Gender</strong>: {properties?.gender}
                         </p>
-                        <p className="col-2">
-                            <strong>Height</strong>
-                            <br />
-                            {properties?.height}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Height</strong>: {properties?.height}
                         </p>
-                        <p className="col-2">
-                            <strong>Skin Color</strong>
-                            <br />
-                            {properties?.skin_color}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Skin Color</strong>: {properties?.skin_color}
                         </p>
-                        <p className="col-2">
-                            <strong>Eye Color </strong>
-                            <br />
-                            {properties?.eye_color}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Eye Color </strong>: {properties?.eye_color}
                         </p>
                     </div>
+                </div>
                 </>
             ) : nature == "planets" ? (
                 <>
                     <div className="card-details row">
-                        <img src="http://via.placeholder.com/800x600" className="card-img-top col-6" alt="..." />
-                        <div className="card-body col-6">
+                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
+                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        </div>
+                        <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
                             <p className="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam assumenda doloribus incidunt molestias minima aliquam dolor in, dolores eaque repellat minus ipsa nihil sunt esse.</p>
                         </div>
                     </div>
                     <hr />
                     <div className="general-details row">
-                        <p className="col-2">
-                            <strong>Name</strong>
-                            <br />
-                            {properties?.name}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Name</strong>: {properties?.name}
                         </p>
-                        <p className="col-2">
-                            <strong>Created</strong>
-                            <br />
-                            {properties?.created}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Created</strong>: {properties?.created}
                         </p>
-                        <p className="col-2">
-                            <strong>Diameter</strong>
-                            <br />
-                            {properties?.diameter}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Diameter</strong>: {properties?.diameter}
                         </p>
-                        <p className="col-2">
-                            <strong>Gravity</strong>
-                            <br />
-                            {properties?.gravity}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Gravity</strong>: {properties?.gravity}
                         </p>
-                        <p className="col-2">
-                            <strong>Population</strong>
-                            <br />
-                            {properties?.population}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Population</strong>: {properties?.population}
                         </p>
-                        <p className="col-2">
-                            <strong>Terrain</strong>
-                            <br />
-                            {properties?.terrain}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Terrain</strong>: {properties?.terrain}
                         </p>
                     </div>
                 </>
             ) : nature == "vehicles" ? (
                 <>
-                    {console.log(nature)}
                     <div className="card-details row">
-                        <img src="http://via.placeholder.com/800x600" className="card-img-top col-6" alt="..." />
-                        <div className="card-body col-6">
+                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
+                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        </div>
+                        <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
                             <p className="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam assumenda doloribus incidunt molestias minima aliquam dolor in, dolores eaque repellat minus ipsa nihil sunt esse.</p>
                         </div>
                     </div>
                     <hr />
                     <div className="general-details row">
-                        <p className="col-2">
-                            <strong>Name</strong>
-                            <br />
-                            {properties?.name}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Name</strong>: {properties?.name}
                         </p>
-                        <p className="col-2">
-                            <strong>Created</strong>
-                            <br />
-                            {properties?.created}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Created</strong>: {properties?.created}
                         </p>
-                        <p className="col-2">
-                            <strong>Length</strong>
-                            <br />
-                            {properties?.length}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Length</strong>: {properties?.length}
                         </p>
-                        <p className="col-2">
-                            <strong>Manufacturer</strong>
-                            <br />
-                            {properties?.manufacturer}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Manufacturer</strong>: {properties?.manufacturer}
                         </p>
-                        <p className="col-2">
-                            <strong>Model</strong>
-                            <br />
-                            {properties?.model}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Model</strong>: {properties?.model}
                         </p>
-                        <p className="col-2">
-                            <strong>Passengers</strong>
-                            <br />
-                            {properties?.passengers}
+                        <p className="col-lg-4 col-md-4 col-sm-12">
+                            <strong>Passengers</strong>: {properties?.passengers}
                         </p>
                     </div>
                 </>

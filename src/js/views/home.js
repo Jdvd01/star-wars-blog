@@ -2,14 +2,15 @@ import React, { useContext } from "react";
 import "../../styles/home.css";
 import Card from "../component/Card.jsx";
 import { Context } from "../store/appContext.js";
+import Title from "../component/Title.jsx";
 
 
 export const Home = () => {
 	const {store} = useContext(Context)
 
 	return (
-		<div className="container col-12">
-			<h1>Characters:</h1>
+		<div className="container col-12 cards-container">
+			<Title title="Characters" />
 			<div className="card-scroll row flex-nowrap">
 				{store.people.map((item) =>{
 					return(
@@ -18,7 +19,7 @@ export const Home = () => {
 				})}
 			</div>
 
-			<h1>Planets:</h1>
+			<Title title="Planets" />
 			<div className="card-scroll row flex-nowrap">
 				{store.planets.map((item) =>{
 					return(
@@ -27,7 +28,7 @@ export const Home = () => {
 				})}
 			</div>
 
-			<h1>Vehicles:</h1>
+			<Title title="Vehicles" />
 			<div className="card-scroll row flex-nowrap">
 				{store.vehicles.map((item) =>{
 					return(

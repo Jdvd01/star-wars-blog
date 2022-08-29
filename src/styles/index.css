@@ -1,41 +1,101 @@
+body {
+    background: url("https://i.pinimg.com/originals/d0/78/4d/d0784dc27859614bbb41c96d6d2c32d5.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Body's Scrollbar */
+body::-webkit-scrollbar{
+    width: 15px;
+    height: 15px;
+    background-color: black;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: #ccc;
+    border-radius: 40px;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
+}
+body::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+body::-webkit-scrollbar-track {
+    background: black;
+    border-radius: 4px;
+}
+
+
+.title{
+    color: white;
+}
+
+
 .navbar{
     margin-bottom: 20px;
     background-color: black;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
 }
 .navbar img{
     width: 150px;
-    height: 90px;
+    height: 80px;
 }
+.navbar ul a{
+    color: black;
+}
+
+
 .footer{
     text-align: center;
     background-color: black;
     color: white;
     padding: 10px 0px;
-    margin-top: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 .footer a{
     color: darkturquoise;
 }
 a{
     text-decoration: none;
-    color: white;
 }
 .card-scroll{
     display: flex;
     overflow-x: scroll;
     margin-bottom: 20px;
 }
+
+/* Card's Scrollbar */
+.card-scroll::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+.card-scroll::-webkit-scrollbar-thumb{
+    background-color: #ccc;
+    border-radius: 4px;
+}
+.card-scroll::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.card-scroll::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
 .delete{
     margin-left: auto;
     margin-right: 5px;
     border: none;
     background-color: white;
 }
-.corazon{
-    border: none;
-    background-color: white;
-}
-.negro{
+
+/* Cards hearth */
+.heart{
     border: none;
     background-color: white;
 }
@@ -45,7 +105,7 @@ a{
 }
 
 
-/* Card del home, con personajes, vehiculos y planetas */
+/* home cards, with people, planets and vehicles */
 .card{
     width: 300px;
     margin: 5px;
@@ -66,14 +126,23 @@ a{
 }
 
 /* Card de details */
-.card-details{
-    height: 500px;
+.card-details, .general-details{
     display: flex;
+    background-color: white;
+    border-radius: 20px;
 }
 .card-details img{
-    width: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 40px;
 }
 .general-details{
-    margin: 20px 80px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.cards-container{
+    padding-bottom: 5em;
 }

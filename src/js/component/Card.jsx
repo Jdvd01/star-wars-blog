@@ -40,7 +40,7 @@ const Card = ({ nature, properties, uid, _id }) => {
               </Link>
               <button
                 type="button"
-                className={`corazon negro`}
+                className={`heart`}
                 onClick={() => {
                   actions.addFavorites(_id);
                 }}
@@ -69,7 +69,7 @@ const Card = ({ nature, properties, uid, _id }) => {
                 <button className="btn btn-primary"> Learn More! </button>
               </Link>
               <button
-                className={`corazon negro`}
+                className={`heart`}
                 onClick={() => actions.addFavorites(_id)}
               >
                 {actions.isFavorite(_id)}
@@ -96,7 +96,7 @@ const Card = ({ nature, properties, uid, _id }) => {
                 <button className="btn btn-primary"> Learn More! </button>
               </Link>
               <button
-                className={`corazon negro`}
+                className={`heart`}
                 onClick={() => actions.addFavorites(_id)}
               >
                 {actions.isFavorite(_id)}
