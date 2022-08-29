@@ -31,9 +31,17 @@ a{
     border: none;
     background-color: white;
 }
+.corazon{
+    border: none;
+    background-color: white;
+}
 .negro{
     border: none;
     background-color: white;
+}
+.red{
+    border: none;
+    color: red;
 }
 
 

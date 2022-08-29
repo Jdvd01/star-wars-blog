@@ -1,3 +1,5 @@
+import React from "react";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -85,6 +87,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				localStorage.setItem("favorites", JSON.stringify(store.favorites))
 			},
+			isFavorite: (newId) => {
+				let store = getStore()
+				let favorite = store.favorites.find((item) => {
+				  return item._id == newId;
+				});
+			
+				if (favorite) {
+				  return <i className="fas fa-heart red"></i>;
+				} else {
+				  return <i className="fas fa-heart"></i>;
+				}
+			  }
 		}
 	}
 };
