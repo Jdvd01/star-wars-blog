@@ -4,7 +4,7 @@ import logo from "../../img/logo.jpg";
 import { Context } from "../store/appContext.js";
 
 export const Navbar = () => {
-	const { store, actions } = useContext(Context)
+	const { store, actions } = useContext(Context);
 	return (
 		<nav className="navbar navbar-dark">
 			<div className="container">
@@ -13,31 +13,49 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					<div className="dropdown">
+						{/* Favorites button */}
 						<button
-							className="btn btn-primary dropdown-toggle favorites"
+							className="btn btn-dark dropdown-toggle favorites"
 							type="button"
 							id="dropdownMenuButton1"
 							data-bs-toggle="dropdown"
-							aria-expanded="false">
+							aria-expanded="false"
+						>
 							Favorites
 							<span className="badge bg-secondary mx-1">
 								{store.favorites.length}
 							</span>
 						</button>
-						<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
-							{ /* Si no hay favorites muestra esto */
-								store.favorites == "" ? (<li className="ms-2">(empty)</li>
+						<ul
+							className="dropdown-menu"
+							aria-labelledby="dropdownMenuButton1"
+						>
+							{
+								/* If favorites is empty */
+								store.favorites == "" ? (
+									<li className="ms-2">(empty)</li>
 								) : (
-									/* Lista de favoritos */
-									store.favorites.map((item) => {
+									/* Favorites list */
+									store.favorites.map((item) => {										
 										return (
-											<li key={item._id} className="ms-2 d-flex">
-												{item.properties.name}
+											<li
+												key={item._id}
+												className="ms-2 d-flex"
+											>
+												<Link to={`${item.nature}/${item.uid}`}>
+													{item.properties.name}
+												</Link>
+
 												<button
 													type="button"
 													className="delete"
-													onClick={() => actions.deleteFavorite(item._id)}>
+													onClick={() =>
+														actions.deleteFavorite(
+															item._id
+														)
+													}
+												>
 													<i className="fas fa-trash"></i>
 												</button>
 											</li>
