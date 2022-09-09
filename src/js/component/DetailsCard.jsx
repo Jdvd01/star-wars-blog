@@ -1,17 +1,23 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-const DetailsCard = ({ detail, nature }) => {
+const DetailsCard = ({ detail, nature, id }) => {
     const { properties } = detail;
     return (
         <>
             {nature == "people" ? (
                 <>
                 <div className='cards-container'>
-
                     <div className="card-details row">
-                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
-                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        <div className='col-lg-2 col-md-6 col-sm-12 p-3 details-img'>
+                            <img src={`${properties?.imgUrlBase}/characters/${id}.jpg`} 
+                            className="card-img-top" 
+                            alt="..." 
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                            }}    
+                        />
                         </div>
                         <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
@@ -43,9 +49,18 @@ const DetailsCard = ({ detail, nature }) => {
                 </>
             ) : nature == "planets" ? (
                 <>
+                <div className='cards-container'>
+
                     <div className="card-details row">
-                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
-                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        <div className='col-lg-2 col-md-6 col-sm-12 p-3 details-img'>
+                            <img src={`${properties?.imgUrlBase}/planets/${id}.jpg`}  
+                            className="card-img-top" 
+                            alt="..." 
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                            }}
+                        />
                         </div>
                         <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
@@ -73,12 +88,22 @@ const DetailsCard = ({ detail, nature }) => {
                             <strong>Terrain</strong>: {properties?.terrain}
                         </p>
                     </div>
+                </div>
                 </>
             ) : nature == "vehicles" ? (
                 <>
+                <div className='cards-container'>
                     <div className="card-details row">
-                        <div className='col-lg-6 col-md-6 col-sm-12 p-3'>
-                            <img src="http://via.placeholder.com/950x500" className="card-img-top" alt="..." />
+                        <div className='col-lg-5 col-md-6 col-sm-12 p-3 details-img'>
+                            <img 
+                                src={`${properties?.imgUrlBase}/vehicles/${id}.jpg`}  
+                                className="card-img-top" 
+                                alt="..." 
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+                                }}
+                            />
                         </div>
                         <div className="card-body col-lg-6 col-md-6 col-sm-12">
                             <p className="card-title">{properties?.name}</p>
@@ -106,6 +131,7 @@ const DetailsCard = ({ detail, nature }) => {
                             <strong>Passengers</strong>: {properties?.passengers}
                         </p>
                     </div>
+                </div>
                 </>
             ) : (
                 <div className="d-flex align-items-center m-5">

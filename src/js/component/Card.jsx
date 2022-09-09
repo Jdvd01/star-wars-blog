@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 
 const Card = ({ nature, properties, uid, _id }) => {
   const { actions } = useContext(Context);
+
+  properties.imgUrlBase = "https://starwars-visualguide.com/assets/img/"
   const {
     name,
     gender,
@@ -16,17 +18,24 @@ const Card = ({ nature, properties, uid, _id }) => {
     model,
     passengers,
     cost_in_credits,
+    imgUrlBase
   } = properties;
 
   return (
     <>
       {nature === "people" ? (
         <div className="card">
-          <img
-            src="https://fakeimg.pl/400x200/"
-            className="card-img"
-            alt="imagen"
-          />
+          <div className="img-container">
+            <img
+              src={`${imgUrlBase}/characters/${uid}.jpg`}
+              className="card-img"
+              alt={`Foto de ${name}`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              }}
+            />
+          </div>
           <div className="card-body">
             <p className="card-title">{name}</p>
             <p className="card-text">
@@ -52,11 +61,17 @@ const Card = ({ nature, properties, uid, _id }) => {
         </div>
       ) : nature === "planets" ? (
         <div className="card">
-          <img
-            src="https://fakeimg.pl/400x200/"
-            className="card-img"
-            alt="imagen"
-          />
+          <div className="img-container">
+            <img
+              src={`${imgUrlBase}/planets/${uid}.jpg`} 
+              className="card-img"
+              alt={`Foto de ${name}`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              }}
+            />
+          </div>
           <div className="card-body">
             <p className="card-title">{name}</p>
             <p className="card-text">
@@ -79,11 +94,17 @@ const Card = ({ nature, properties, uid, _id }) => {
         </div>
       ) : nature === "vehicles" ? (
         <div className="card">
-          <img
-            src="https://fakeimg.pl/400x200/"
-            className="card-img"
-            alt="imagen"
-          />
+          <div className="img-container">
+            <img
+              src={`${imgUrlBase}/vehicles/${uid}.jpg`}
+              className="card-img"
+              alt={`Foto de ${name}`}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src="https://starwars-visualguide.com/assets/img/placeholder.jpg";
+              }}
+            />
+          </div>
           <div className="card-body">
             <p className="card-title">{name}</p>
             <p className="card-text">

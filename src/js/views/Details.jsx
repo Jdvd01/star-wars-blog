@@ -29,7 +29,7 @@ const Details = () => {
     return (
         <>
             <div className='container'>
-                <DetailsCard detail={detail} nature={nature} />
+                <DetailsCard detail={detail} nature={nature} id={params.id} />
             </div>
         </>
 
