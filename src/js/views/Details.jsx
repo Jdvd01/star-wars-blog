@@ -24,7 +24,7 @@ const Details = () => {
 
     useEffect(() => {
         getDetails()
-    }, [])
+    }, [id])
 
     return (
         <>
